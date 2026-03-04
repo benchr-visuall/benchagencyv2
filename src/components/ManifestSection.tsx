@@ -58,7 +58,15 @@ export function ManifestSection() {
       <div className="mx-auto flex w-full max-w-5xl flex-col items-center text-center">
         {/* Section Label */}
         <div className="mb-12 flex items-center justify-center gap-4">
-          <span className="text-sm font-black text-[var(--lime)]" style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: '0.1em' }}>02</span>
+          <span
+            className="text-sm font-black text-[var(--lime)]"
+            style={{
+              fontFamily: "'Bebas Neue', sans-serif",
+              letterSpacing: 'var(--tracking-tight)',
+            }}
+          >
+            02
+          </span>
           <span className="h-px w-8 bg-white/20" />
           <span className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase">
             Manifeste
@@ -69,21 +77,28 @@ export function ManifestSection() {
         {/* Section Title */}
         <h2
           className="mb-16 text-5xl leading-[0.9] font-black text-white uppercase md:text-7xl lg:text-8xl"
-          style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+          style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: 'var(--tracking-ultra)' }}
         >
-          Mécanique de précision<br />
-          pour <span style={{ color: 'var(--lime)', textShadow: '0 0 30px rgba(209,255,0,0.2)' }}>votre visibilité.</span>
+          Mécanique de précision
+          <br />
+          pour{' '}
+          <span style={{ color: 'var(--lime)', textShadow: '0 0 30px rgba(209,255,0,0.2)' }}>
+            votre visibilité.
+          </span>
         </h2>
 
         {/* Animated Text */}
         <p
           ref={textRef}
           className="max-w-4xl text-2xl leading-[1.6] font-medium tracking-tight uppercase md:text-4xl lg:text-[40px]"
-          style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: '0.04em' }}
+          style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: 'var(--tracking-tight)' }}
           aria-label={BODY_TEXT}
         >
           {words.map((word, i) => (
-            <span key={i} style={{ color: '#1a1a1a', transition: 'color 0.2s ease, text-shadow 0.2s ease' }}>
+            <span
+              key={i}
+              style={{ color: '#1a1a1a', transition: 'color 0.2s ease, text-shadow 0.2s ease' }}
+            >
               {word}{' '}
             </span>
           ))}

@@ -9,6 +9,10 @@
   --gray: #888888;
   --font-display: 'Bebas Neue', sans-serif;
   --font-body: 'Space Grotesk', sans-serif;
+  /* Typography Refinement 1.1 */
+  --tracking-tight: -0.015em;
+  --tracking-ultra: -0.03em;
+  --tracking-readable: 0.015em;
 }
 
 @theme inline {
@@ -17,7 +21,6 @@
   --font-sans: var(--font-body);
   --font-display: var(--font-display);
 }
-
 
 html {
   overflow-x: hidden;

@@ -27,7 +27,10 @@ export function Navigation() {
         >
           <span
             className="text-2xl font-bold tracking-widest"
-            style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: '0.12em' }}
+            style={{
+              fontFamily: "'Bebas Neue', sans-serif",
+              letterSpacing: 'var(--tracking-tight)',
+            }}
           >
             BENCH<span style={{ color: 'var(--lime)' }}>AGENCY</span>
           </span>
@@ -94,7 +97,10 @@ export function Navigation() {
             href={link.href}
             onClick={() => setOpen(false)}
             className="text-4xl text-white transition-colors hover:text-[var(--lime)]"
-            style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: '0.1em' }}
+            style={{
+              fontFamily: "'Bebas Neue', sans-serif",
+              letterSpacing: 'var(--tracking-tight)',
+            }}
           >
             {link.label}
           </a>

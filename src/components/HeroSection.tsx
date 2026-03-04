@@ -19,9 +19,7 @@ export function HeroSection() {
         {/* Intro label */}
         <div className="mb-12 flex items-center justify-center gap-4">
           <span className="h-px w-12 bg-white/20" />
-          <span
-            className="text-xs font-bold tracking-[0.2em] text-gray-400 uppercase"
-          >
+          <span className="text-xs font-bold tracking-[0.2em] text-gray-400 uppercase">
             Creative Engineering — Annecy - Genève
           </span>
           <span className="h-px w-12 bg-white/20" />
@@ -29,16 +27,30 @@ export function HeroSection() {
 
         {/* Main Title */}
         <h1
-          className="mb-8 text-[clamp(4rem,10vw,8rem)] leading-[0.9] font-black tracking-tight text-white uppercase flex flex-col items-center"
-          style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+          className="mb-8 flex flex-col items-center text-[clamp(3.5rem,9vw,7rem)] leading-[0.9] font-black tracking-tight text-white uppercase"
+          style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: 'var(--tracking-ultra)' }}
         >
-          <span>Nous forgeons <span style={{ color: 'var(--lime)', textShadow: '0 0 40px rgba(209,255,0,0.3)' }}>votre image.</span></span>
-          <span>Nous simplifions <span style={{ color: 'var(--lime)' }}>votre site web.</span></span>
+          <span>
+            Nous forgeons{' '}
+            <span style={{ color: 'var(--lime)', textShadow: '0 0 40px rgba(209,255,0,0.3)' }}>
+              votre image.
+            </span>
+          </span>
+          <span>
+            Nous simplifions <span style={{ color: 'var(--lime)' }}>votre site web.</span>
+          </span>
         </h1>
 
         {/* Subtitle */}
-        <p className="max-w-4xl text-xl leading-none text-white font-bold md:text-2xl mx-auto mb-16 lowercase tracking-tight" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
-          un brief ce matin. votre site <span style={{ color: 'var(--lime)' }}>en ligne demain.</span>
+        <p
+          className="mx-auto mb-16 max-w-4xl text-xl leading-none font-bold tracking-tight text-white lowercase md:text-2xl"
+          style={{
+            fontFamily: "'Bebas Neue', sans-serif",
+            letterSpacing: 'var(--tracking-readable)',
+          }}
+        >
+          un brief ce matin. votre site{' '}
+          <span style={{ color: 'var(--lime)' }}>en ligne demain.</span>
         </p>
 
         {/* Stats & CTA Row */}
@@ -52,7 +64,10 @@ export function HeroSection() {
               <div key={stat.label} className="flex flex-col gap-1">
                 <span
                   className="text-4xl font-black text-white md:text-5xl"
-                  style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: '0.02em' }}
+                  style={{
+                    fontFamily: "'Bebas Neue', sans-serif",
+                    letterSpacing: 'var(--tracking-tight)',
+                  }}
                 >
                   {stat.value}
                 </span>
@@ -63,11 +78,11 @@ export function HeroSection() {
             ))}
           </div>
 
-          <div className="h-16 w-px bg-white/10 hidden md:block" />
+          <div className="hidden h-16 w-px bg-white/10 md:block" />
 
           <a
             href="#contact"
-            className="group relative flex h-16 w-64 overflow-hidden bg-white text-black transition-all duration-500 items-center justify-center font-bold tracking-wider text-sm uppercase rounded-full"
+            className="group relative flex h-16 w-64 items-center justify-center overflow-hidden rounded-full bg-white text-sm font-bold tracking-wider text-black uppercase transition-all duration-500"
           >
             <span className="relative z-10 transition-colors duration-300 group-hover:text-black">
               Un café et un site?
@@ -81,7 +96,17 @@ export function HeroSection() {
       </div>
 
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-50">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="text-white"
+        >
           <rect x="7" y="4" width="10" height="16" rx="5" ry="5"></rect>
           <path d="M12 8v4"></path>
         </svg>

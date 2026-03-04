@@ -14,14 +14,20 @@ export function Footer() {
       >
         <div className="marquee-track flex w-max">
           <span
-            className="text-6xl md:text-8xl leading-none font-black uppercase text-[var(--lime)]"
-            style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+            className="text-6xl leading-none font-black text-[var(--lime)] uppercase md:text-8xl"
+            style={{
+              fontFamily: "'Bebas Neue', sans-serif",
+              letterSpacing: 'var(--tracking-readable)',
+            }}
           >
             {MARQUEE_TEXT}
           </span>
           <span
-            className="text-6xl md:text-8xl leading-none font-black uppercase text-[var(--lime)]"
-            style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+            className="text-6xl leading-none font-black text-[var(--lime)] uppercase md:text-8xl"
+            style={{
+              fontFamily: "'Bebas Neue', sans-serif",
+              letterSpacing: 'var(--tracking-readable)',
+            }}
           >
             {MARQUEE_TEXT}
           </span>
@@ -30,18 +36,25 @@ export function Footer() {
 
       <div className="mx-auto flex w-full max-w-7xl flex-col px-6 py-24 md:py-32">
         <div className="flex flex-col items-center gap-16 md:flex-row md:items-start md:justify-between">
-
           {/* Logo & Mission (Centered on mobile, Left on Desktop) */}
-          <div className="flex flex-col items-center text-center md:items-start md:text-left gap-8">
+          <div className="flex flex-col items-center gap-8 text-center md:items-start md:text-left">
             <span
-              className="text-6xl md:text-8xl leading-none font-black text-white"
-              style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: '0.02em' }}
+              className="text-6xl leading-none font-black text-white md:text-8xl"
+              style={{
+                fontFamily: "'Bebas Neue', sans-serif",
+                letterSpacing: 'var(--tracking-ultra)',
+              }}
             >
-              BENCH<span style={{ color: 'var(--lime)', textShadow: '0 0 40px rgba(209,255,0,0.2)' }}>AGENCY</span>
+              BENCH
+              <span style={{ color: 'var(--lime)', textShadow: '0 0 40px rgba(209,255,0,0.2)' }}>
+                AGENCY
+              </span>
             </span>
-            <p className="max-w-xs text-sm font-medium leading-relaxed tracking-widest text-gray-400 uppercase">
-              Ingénierie créative d&apos;élite.<br />
-              Précision chirurgicale.<br />
+            <p className="max-w-xs text-sm leading-relaxed font-medium tracking-widest text-gray-400 uppercase">
+              Ingénierie créative d&apos;élite.
+              <br />
+              Précision chirurgicale.
+              <br />
               Zéro friction.
             </p>
           </div>
@@ -52,7 +65,7 @@ export function Footer() {
               <a
                 key={link}
                 href={`#${link.toLowerCase().replace('é', 'e')}`}
-                className="group flex items-center justify-center md:justify-start text-xs font-bold tracking-[0.2em] text-gray-500 uppercase transition-colors hover:text-white"
+                className="group flex items-center justify-center text-xs font-bold tracking-[0.2em] text-gray-500 uppercase transition-colors hover:text-white md:justify-start"
               >
                 {link}
               </a>
@@ -61,9 +74,9 @@ export function Footer() {
         </div>
 
         {/* Global bottom bar */}
-        <div className="mt-24 flex flex-col items-center gap-8 border-t border-white/5 pt-12 md:flex-row md:justify-between text-center md:text-left">
+        <div className="mt-24 flex flex-col items-center gap-8 border-t border-white/5 pt-12 text-center md:flex-row md:justify-between md:text-left">
           <div className="flex items-center gap-4">
-            <div className="h-2 w-2 rounded-full bg-[var(--lime)] animate-pulse" />
+            <div className="h-2 w-2 animate-pulse rounded-full bg-[var(--lime)]" />
             <span className="text-[10px] font-bold tracking-[0.3em] text-gray-400 uppercase">
               Système opérationnel — Annecy - Genève 2025
             </span>

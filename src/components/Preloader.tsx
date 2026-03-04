@@ -55,7 +55,10 @@ export function Preloader() {
           {/* Logo */}
           <div
             className="text-5xl font-bold tracking-wider text-white"
-            style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+            style={{
+              fontFamily: "'Bebas Neue', sans-serif",
+              letterSpacing: 'var(--tracking-ultra)',
+            }}
           >
             BENCH<span style={{ color: 'var(--lime)' }}>AGENCY</span>
           </div>
@@ -66,7 +69,11 @@ export function Preloader() {
               <div key={m.label} className="flex flex-col items-center gap-1">
                 <span
                   className="text-3xl font-bold"
-                  style={{ color: 'var(--lime)', fontFamily: "'Bebas Neue', sans-serif" }}
+                  style={{
+                    color: 'var(--lime)',
+                    fontFamily: "'Bebas Neue', sans-serif",
+                    letterSpacing: 'var(--tracking-tight)',
+                  }}
                 >
                   {m.label === 'PERFORMANCE' ? count : m.value}
                 </span>
