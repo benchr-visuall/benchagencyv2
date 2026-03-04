@@ -4,17 +4,17 @@
 
 Check for these files to determine the project's language/framework:
 
-| File | Language | SDK |
-|------|----------|-----|
-| `package.json` | Node.js/TypeScript | resend |
-| `requirements.txt` or `pyproject.toml` | Python | resend |
-| `go.mod` | Go | resend-go/v3 |
-| `Gemfile` | Ruby | resend |
-| `composer.json` | PHP | resend/resend-php |
-| `Cargo.toml` | Rust | resend-rs |
-| `pom.xml` or `build.gradle` | Java | resend-java |
-| `*.csproj` or `*.sln` | .NET | Resend |
-| `mix.exs` | Elixir | resend |
+| File                                   | Language           | SDK               |
+| -------------------------------------- | ------------------ | ----------------- |
+| `package.json`                         | Node.js/TypeScript | resend            |
+| `requirements.txt` or `pyproject.toml` | Python             | resend            |
+| `go.mod`                               | Go                 | resend-go/v3      |
+| `Gemfile`                              | Ruby               | resend            |
+| `composer.json`                        | PHP                | resend/resend-php |
+| `Cargo.toml`                           | Rust               | resend-rs         |
+| `pom.xml` or `build.gradle`            | Java               | resend-java       |
+| `*.csproj` or `*.sln`                  | .NET               | Resend            |
+| `mix.exs`                              | Elixir             | resend            |
 
 ## Installation Commands
 
@@ -25,6 +25,7 @@ npm install resend
 ```
 
 Alternative package managers:
+
 ```bash
 yarn add resend
 pnpm add resend
@@ -50,6 +51,7 @@ gem install resend
 ```
 
 Or add to Gemfile:
+
 ```ruby
 gem 'resend'
 ```
@@ -70,11 +72,13 @@ cargo add tokio -F macros,rt-multi-thread
 ### Java
 
 Gradle:
+
 ```gradle
 implementation 'com.resend:resend-java:+'
 ```
 
 Maven:
+
 ```xml
 <dependency>
   <groupId>com.resend</groupId>
@@ -92,6 +96,7 @@ dotnet add package Resend
 ### Elixir
 
 Add to `mix.exs`:
+
 ```elixir
 def deps do
   [

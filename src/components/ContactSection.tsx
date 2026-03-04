@@ -1,0 +1,136 @@
+'use client'
+
+import { useActionState } from 'react'
+import { submitContact, type FormState } from '@/actions/contact'
+
+const SERVICES = [
+  { id: 'basic', label: 'Basic — 590€' },
+  { id: 'multi', label: 'Multi — 990€' },
+  { id: 'signature', label: 'Signature — 1490€' },
+  { id: 'studio', label: 'Studio 360°' },
+  { id: 'other', label: 'Autre chose' },
+] as const
+
+export function ContactSection() {
+  const [state, action, pending] = useActionState<FormState, FormData>(submitContact, null)
+
+  return (
+    <section
+      id="contact"
+      className="noise relative flex flex-col items-center border-t border-white/5 px-6 py-32 md:py-48"
+      style={{ background: 'var(--black)' }}
+    >
+      <div className="mx-auto flex w-full max-w-4xl flex-col items-center text-center">
+        {/* Section Label */}
+        <div className="mb-8 flex items-center justify-center gap-4">
+          <span className="text-sm font-black text-[var(--lime)]" style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: '0.05em' }}>07</span>
+          <span className="h-px w-8 bg-white/20" />
+          <span className="text-xs font-bold tracking-widest text-gray-400 uppercase">Contact</span>
+          <span className="h-px w-8 bg-white/20" />
+        </div>
+
+        {/* Title */}
+        <h2
+          className="mb-16 text-5xl leading-[0.9] font-black text-white uppercase md:text-7xl lg:text-8xl"
+          style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+        >
+          Démarrez le <span style={{ color: 'var(--lime)', textShadow: '0 0 40px rgba(209,255,0,0.2)' }}>projet.</span>
+        </h2>
+
+        {/* Form Container */}
+        <div className="w-full rounded-3xl border border-white/10 bg-white/[0.02] p-8 md:p-16 text-left">
+          {state?.success ? (
+            <div className="flex flex-col items-center justify-center py-20 text-center">
+              <div className="flex h-32 w-32 items-center justify-center rounded-full bg-[var(--lime)] mb-8 shadow-[0_0_60px_rgba(209,255,0,0.3)]">
+                <span className="text-6xl font-black text-black">✓</span>
+              </div>
+              <h3 className="text-4xl font-black uppercase text-white tracking-widest" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
+                Mission confirmée
+              </h3>
+              <p className="mt-4 text-sm font-medium leading-relaxed tracking-widest text-gray-400 uppercase">
+                Nous analysons les paramètres. Retour sous 24h.
+              </p>
+            </div>
+          ) : (
+            <form action={action} className="flex flex-col gap-10">
+
+              {/* Service selection */}
+              <div>
+                <label className="mb-6 block text-xs font-bold tracking-widest text-gray-400 uppercase">
+                  Quel module vous intéresse ?
+                </label>
+                <div className="flex flex-wrap gap-4">
+                  {SERVICES.map((s) => (
+                    <label
+                      key={s.id}
+                      className="group flex cursor-none items-center gap-3 rounded-full border border-white/20 bg-transparent px-6 py-3 text-xs font-bold uppercase tracking-widest transition-all duration-300 has-[:checked]:border-[var(--lime)] has-[:checked]:bg-[var(--lime)] has-[:checked]:text-black hover:border-white/40"
+                      style={{ color: 'rgba(255,255,255,0.7)' }}
+                    >
+                      <input type="radio" name="service" value={s.id} className="sr-only" required />
+                      {s.label}
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Grid Fields */}
+              <div className="grid gap-6 md:grid-cols-2">
+                <div className="flex flex-col gap-3">
+                  <label className="text-xs font-bold tracking-widest text-gray-400 uppercase">Nom</label>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Jean Dupont"
+                    required
+                    className="w-full rounded-xl border border-white/10 bg-black/50 px-5 py-4 text-white outline-none transition-all placeholder:text-gray-700 focus:border-[var(--lime)] focus:bg-white/[0.02]"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-3">
+                  <label className="text-xs font-bold tracking-widest text-gray-400 uppercase">Email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="jean@exemple.fr"
+                    required
+                    className="w-full rounded-xl border border-white/10 bg-black/50 px-5 py-4 text-white outline-none transition-all placeholder:text-gray-700 focus:border-[var(--lime)] focus:bg-white/[0.02]"
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-3">
+                <label className="text-xs font-bold tracking-widest text-gray-400 uppercase">Projet</label>
+                <textarea
+                  name="message"
+                  rows={5}
+                  placeholder="Expliquez-nous votre vision..."
+                  required
+                  className="w-full resize-none rounded-xl border border-white/10 bg-black/50 px-5 py-4 text-white outline-none transition-all placeholder:text-gray-700 focus:border-[var(--lime)] focus:bg-white/[0.02]"
+                />
+              </div>
+
+              {state?.error && (
+                <p className="text-xs font-bold tracking-widest uppercase text-red-500 text-center">
+                  {state.error}
+                </p>
+              )}
+
+              <div className="flex justify-center w-full mt-4">
+                <button
+                  type="submit"
+                  disabled={pending}
+                  className="group relative flex h-16 w-auto min-w-[300px] px-12 rounded-full overflow-hidden bg-[var(--lime)] text-black transition-all duration-500 disabled:opacity-50 items-center justify-center"
+                >
+                  <span className="relative z-10 mx-auto flex items-center justify-center font-bold tracking-wider uppercase">
+                    {pending ? 'Envoi en cours...' : 'Challenge accepted :)'}
+                  </span>
+                  <div className="absolute inset-0 origin-right scale-x-0 bg-white transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-x-100" />
+                </button>
+              </div>
+            </form>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}

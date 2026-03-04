@@ -27,11 +27,11 @@ No DNS configuration needed. Find your address in Dashboard → Emails → Recei
 
 Add MX record to receive at `<anything>@yourdomain.com`.
 
-| Setting | Value |
-|---------|-------|
-| **Type** | MX |
-| **Host** | Your domain or subdomain |
-| **Value** | Provided in Resend dashboard |
+| Setting      | Value                                                                               |
+| ------------ | ----------------------------------------------------------------------------------- |
+| **Type**     | MX                                                                                  |
+| **Host**     | Your domain or subdomain                                                            |
+| **Value**    | Provided in Resend dashboard                                                        |
 | **Priority** | 10 (**lowest number** wins a conflict, but typically only multiples of 10 are used) |
 
 **Critical:** Your MX record must have the lowest priority value, or emails won't route to Resend.
@@ -40,17 +40,17 @@ Add MX record to receive at `<anything>@yourdomain.com`.
 
 If you already have MX records (e.g., Google Workspace, Microsoft 365):
 
-| Approach | Result |
-|----------|--------|
+| Approach                        | Result                                                      |
+| ------------------------------- | ----------------------------------------------------------- |
 | **Use subdomain** (recommended) | `support.acme.com` → Resend, `acme.com` → existing provider |
-| **Use root domain** | All email routes to Resend (breaks existing email) |
+| **Use root domain**             | All email routes to Resend (breaks existing email)          |
 
 ```
 # Example: receive at support.acme.com without affecting acme.com
 support.acme.com.  MX  10  <resend-mx-value>
 ```
 
-If you set up Resend to receive email on a root domain, *all* traffic will be routed to Resend, not to any other mailbox. It's crucial, then, to use a subdomain with inbound emails.
+If you set up Resend to receive email on a root domain, _all_ traffic will be routed to Resend, not to any other mailbox. It's crucial, then, to use a subdomain with inbound emails.
 
 ## Webhook Setup
 
@@ -59,6 +59,7 @@ If you set up Resend to receive email on a root domain, *all* traffic will be ro
 Dashboard → Webhooks → Add Webhook → Select `email.received`
 
 For local development, use tunneling (ngrok, VS Code Port Forwarding):
+
 ```bash
 ngrok http 3000
 # Use https://abc123.ngrok.io/api/webhook as endpoint
@@ -95,12 +96,12 @@ ngrok http 3000
 Always verify signatures to prevent spoofed events:
 
 ```typescript
-import { Resend } from 'resend';
+import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function POST(req: Request) {
-  const payload = await req.text();
+  const payload = await req.text()
 
   const event = resend.webhooks.verify({
     payload,
@@ -110,13 +111,13 @@ export async function POST(req: Request) {
       'svix-signature': req.headers.get('svix-signature'),
     },
     secret: process.env.RESEND_WEBHOOK_SECRET,
-  });
+  })
 
   if (event.type === 'email.received') {
     // Process the email
   }
 
-  return new Response('OK', { status: 200 });
+  return new Response('OK', { status: 200 })
 }
 ```
 
@@ -126,13 +127,11 @@ Webhooks exclude email body and headers. Call the Receiving API to get them:
 
 ```typescript
 if (event.type === 'email.received') {
-  const { data: email } = await resend.emails.receiving.get(
-    event.data.email_id
-  );
+  const { data: email } = await resend.emails.receiving.get(event.data.email_id)
 
-  console.log(email.html);    // HTML body
-  console.log(email.text);    // Plain text body
-  console.log(email.headers); // Email headers
+  console.log(email.html) // HTML body
+  console.log(email.text) // Plain text body
+  console.log(email.headers) // Email headers
 }
 ```
 
@@ -145,23 +144,23 @@ if (event.type === 'email.received') {
 ```typescript
 const { data: attachments } = await resend.emails.receiving.attachments.list({
   emailId: event.data.email_id,
-});
+})
 
 for (const attachment of attachments) {
-  console.log(attachment.filename);
-  console.log(attachment.download_url);  // Valid for 1 hour
-  console.log(attachment.expires_at);
+  console.log(attachment.filename)
+  console.log(attachment.download_url) // Valid for 1 hour
+  console.log(attachment.expires_at)
 }
 ```
 
 ### Download Attachment Content
 
 ```typescript
-const response = await fetch(attachment.download_url);
-const buffer = await response.arrayBuffer();
+const response = await fetch(attachment.download_url)
+const buffer = await response.arrayBuffer()
 
 // Save to storage, process, etc.
-await saveToStorage(attachment.filename, buffer);
+await saveToStorage(attachment.filename, buffer)
 ```
 
 **Important:** `download_url` expires after 1 hour. Call the API again for a fresh URL if needed.
@@ -171,36 +170,36 @@ await saveToStorage(attachment.filename, buffer);
 Complete workflow to receive and forward an email with attachments:
 
 ```typescript
-import { Resend } from 'resend';
+import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function POST(req: Request) {
-  const payload = await req.text();
-  const event = resend.webhooks.verify({ /* ... */ });
+  const payload = await req.text()
+  const event = resend.webhooks.verify({
+    /* ... */
+  })
 
   if (event.type === 'email.received') {
     // 1. Get email content
-    const { data: email } = await resend.emails.receiving.get(
-      event.data.email_id
-    );
+    const { data: email } = await resend.emails.receiving.get(event.data.email_id)
 
     // 2. Get attachments (if any)
     const { data: attachmentList } = await resend.emails.receiving.attachments.list({
       emailId: event.data.email_id,
-    });
+    })
 
     // 3. Download and encode attachments
     const attachments = await Promise.all(
       attachmentList.map(async (att) => {
-        const res = await fetch(att.download_url);
-        const buffer = Buffer.from(await res.arrayBuffer());
+        const res = await fetch(att.download_url)
+        const buffer = Buffer.from(await res.arrayBuffer())
         return {
           filename: att.filename,
           content: buffer.toString('base64'),
-        };
+        }
       })
-    );
+    )
 
     // 4. Forward the email
     await resend.emails.send({
@@ -210,10 +209,10 @@ export async function POST(req: Request) {
       html: email.html,
       text: email.text,
       attachments,
-    });
+    })
   }
 
-  return new Response('OK', { status: 200 });
+  return new Response('OK', { status: 200 })
 }
 ```
 
@@ -223,32 +222,33 @@ All emails to your domain arrive at the same webhook. Route based on the `to` fi
 
 ```typescript
 if (event.type === 'email.received') {
-  const recipient = event.data.to[0];
+  const recipient = event.data.to[0]
 
   if (recipient.includes('support@')) {
-    await handleSupportEmail(event.data);
+    await handleSupportEmail(event.data)
   } else if (recipient.includes('billing@')) {
-    await handleBillingEmail(event.data);
+    await handleBillingEmail(event.data)
   } else {
-    await handleUnknownEmail(event.data);
+    await handleUnknownEmail(event.data)
   }
 }
 ```
 
 ## Common Mistakes
 
-| Mistake | Fix |
-|---------|-----|
-| Expecting body in webhook payload | Webhook has metadata only - call `resend.emails.receiving.get()` for body |
-| MX record not lowest priority | Ensure Resend's MX has lowest number (highest priority) |
-| Adding MX to root domain with existing email | Use subdomain to avoid breaking existing email service |
-| Using expired download_url | URLs expire after 1 hour - call attachments API again for fresh URL |
-| Not verifying webhook signatures | Always verify - attackers can send fake events |
-| Forgetting to return 200 OK | Resend retries on non-200 responses |
+| Mistake                                      | Fix                                                                       |
+| -------------------------------------------- | ------------------------------------------------------------------------- |
+| Expecting body in webhook payload            | Webhook has metadata only - call `resend.emails.receiving.get()` for body |
+| MX record not lowest priority                | Ensure Resend's MX has lowest number (highest priority)                   |
+| Adding MX to root domain with existing email | Use subdomain to avoid breaking existing email service                    |
+| Using expired download_url                   | URLs expire after 1 hour - call attachments API again for fresh URL       |
+| Not verifying webhook signatures             | Always verify - attackers can send fake events                            |
+| Forgetting to return 200 OK                  | Resend retries on non-200 responses                                       |
 
 ## Storage Note
 
 Resend stores received emails even if:
+
 - Webhook isn't configured yet
 - Webhook endpoint is down
 
