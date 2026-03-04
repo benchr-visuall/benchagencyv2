@@ -1,6 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const PROJECTS = [
   {
@@ -27,8 +31,39 @@ const PROJECTS = [
 ] as const
 
 export function CreationsSection() {
+  const sectionRef = useRef<HTMLElement>(null)
   const [hoveredId, setHoveredId] = useState<string | null>(null)
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from('.animate-up', {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 80%',
+        },
+      })
+
+      gsap.from('.animate-card', {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.cards-list',
+          start: 'top 80%',
+        },
+      })
+    }, sectionRef)
+
+    return () => ctx.revert()
+  }, [])
 
   const onMouseMove = (e: React.MouseEvent) => {
     setMousePos({ x: e.clientX, y: e.clientY })
@@ -37,6 +72,7 @@ export function CreationsSection() {
   return (
     <section
       id="creations"
+      ref={sectionRef}
       className="noise relative flex flex-col items-center border-t border-white/5 py-32 md:py-48"
       style={{ background: 'var(--off-black)' }}
       onMouseMove={onMouseMove}
@@ -67,7 +103,7 @@ export function CreationsSection() {
 
       <div className="mx-auto flex w-full max-w-7xl flex-col items-center px-6 text-center">
         {/* Section Label */}
-        <div className="mb-8 flex items-center justify-center gap-4">
+        <div className="animate-up mb-8 flex items-center justify-center gap-4">
           <span
             className="text-sm font-black text-[var(--lime)]"
             style={{
@@ -86,7 +122,7 @@ export function CreationsSection() {
 
         {/* Title */}
         <h2
-          className="mb-24 text-5xl leading-[0.9] font-black tracking-tighter text-white uppercase md:text-7xl lg:text-9xl"
+          className="animate-up mb-24 text-5xl leading-[0.9] font-black tracking-tighter text-white uppercase md:text-7xl lg:text-9xl"
           style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: 'var(--tracking-ultra)' }}
         >
           Que c'est{' '}
@@ -97,9 +133,9 @@ export function CreationsSection() {
       </div>
 
       {/* Centered Portfolio List */}
-      <div className="flex w-full max-w-6xl flex-col border-t border-white/10 px-6">
+      <div className="cards-list flex w-full max-w-6xl flex-col border-t border-white/10 px-6">
         {PROJECTS.map((project) => (
-          <div key={project.id} className="group relative">
+          <div key={project.id} className="animate-card group relative">
             <a
               href={project.url}
               target="_blank"

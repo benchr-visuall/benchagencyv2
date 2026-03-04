@@ -16,8 +16,7 @@ export function Navigation() {
   return (
     <>
       <nav
-        className="fixed top-0 right-0 left-0 z-50 flex items-center justify-between px-6 py-5 md:px-10"
-        style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}
+        className="fixed top-0 right-0 left-0 z-50 flex items-center justify-between border-b border-white/5 bg-black/50 px-6 py-5 backdrop-blur-md md:px-10"
       >
         {/* Logo */}
         <a

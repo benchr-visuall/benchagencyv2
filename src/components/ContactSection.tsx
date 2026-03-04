@@ -1,7 +1,11 @@
 'use client'
 
-import { useActionState } from 'react'
+import { useActionState, useEffect, useRef } from 'react'
 import { submitContact, type FormState } from '@/actions/contact'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const SERVICES = [
   { id: 'basic', label: 'Basic — 590€' },
@@ -12,17 +16,48 @@ const SERVICES = [
 ] as const
 
 export function ContactSection() {
+  const sectionRef = useRef<HTMLElement>(null)
   const [state, action, pending] = useActionState<FormState, FormData>(submitContact, null)
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from('.animate-up', {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 80%',
+        },
+      })
+
+      gsap.from('.animate-form', {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.form-container',
+          start: 'top 80%',
+        },
+      })
+    }, sectionRef)
+
+    return () => ctx.revert()
+  }, [])
 
   return (
     <section
       id="contact"
+      ref={sectionRef}
       className="noise relative flex flex-col items-center border-t border-white/5 px-6 py-32 md:py-48"
       style={{ background: 'var(--black)' }}
     >
       <div className="mx-auto flex w-full max-w-4xl flex-col items-center text-center">
         {/* Section Label */}
-        <div className="mb-8 flex items-center justify-center gap-4">
+        <div className="animate-up mb-8 flex items-center justify-center gap-4">
           <span
             className="text-sm font-black text-[var(--lime)]"
             style={{
@@ -39,7 +74,7 @@ export function ContactSection() {
 
         {/* Title */}
         <h2
-          className="mb-16 text-5xl leading-[0.9] font-black text-white uppercase md:text-7xl lg:text-8xl"
+          className="animate-up mb-16 text-5xl leading-[0.9] font-black text-white uppercase md:text-7xl lg:text-8xl"
           style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: 'var(--tracking-ultra)' }}
         >
           Démarrez le{' '}
@@ -49,7 +84,7 @@ export function ContactSection() {
         </h2>
 
         {/* Form Container */}
-        <div className="w-full rounded-3xl border border-white/10 bg-white/[0.02] p-8 text-left md:p-16">
+        <div className="animate-form form-container w-full rounded-3xl border border-white/10 bg-white/[0.02] p-8 text-left md:p-16">
           {state?.success ? (
             <div className="flex flex-col items-center justify-center py-20 text-center">
               <div className="mb-8 flex h-32 w-32 items-center justify-center rounded-full bg-[var(--lime)] shadow-[0_0_60px_rgba(209,255,0,0.3)]">

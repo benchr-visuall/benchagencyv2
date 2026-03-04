@@ -14,36 +14,54 @@ export function ManifestSection() {
   const textRef = useRef<HTMLParagraphElement>(null)
 
   useEffect(() => {
-    const words = textRef.current?.querySelectorAll('span')
-    if (!words || !sectionRef.current) return
+    const ctx = gsap.context(() => {
+      // Title and Label animations
+      gsap.from('.animate-up', {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 80%',
+        },
+      })
 
-    gsap.set(words, { color: '#1a1a1a' })
+      // Body text reveal
+      const words = textRef.current?.querySelectorAll('span')
+      if (words && sectionRef.current) {
+        gsap.set(words, { color: '#1a1a1a' })
 
-    ScrollTrigger.create({
-      trigger: sectionRef.current,
-      start: 'top 75%',
-      end: 'bottom 60%',
-      scrub: 1,
-      onUpdate: (self) => {
-        const progress = self.progress
-        const total = words.length
+        ScrollTrigger.create({
+          trigger: sectionRef.current,
+          start: 'top 75%',
+          end: 'bottom 60%',
+          scrub: 1,
+          onUpdate: (self) => {
+            const progress = self.progress
+            const total = words.length
 
-        words.forEach((word, i) => {
-          const wordProgress = i / total
-          if (progress > wordProgress + 0.1) {
-            word.style.color = '#ffffff'
-          } else if (progress > wordProgress) {
-            word.style.color = '#d1ff00'
-            word.style.textShadow = '0 0 20px rgba(209,255,0,0.5)'
-          } else {
-            word.style.color = '#1a1a1a'
-            word.style.textShadow = 'none'
-          }
+            words.forEach((w, i) => {
+              const word = w as HTMLElement
+              const wordProgress = i / total
+              if (progress > wordProgress + 0.1) {
+                word.style.color = '#ffffff'
+                word.style.textShadow = 'none'
+              } else if (progress > wordProgress) {
+                word.style.color = '#d1ff00'
+                word.style.textShadow = '0 0 20px rgba(209,255,0,0.5)'
+              } else {
+                word.style.color = '#1a1a1a'
+                word.style.textShadow = 'none'
+              }
+            })
+          },
         })
-      },
-    })
+      }
+    }, sectionRef)
 
-    return () => ScrollTrigger.getAll().forEach((t) => t.kill())
+    return () => ctx.revert()
   }, [])
 
   const words = BODY_TEXT.split(' ')
@@ -57,7 +75,7 @@ export function ManifestSection() {
     >
       <div className="mx-auto flex w-full max-w-5xl flex-col items-center text-center">
         {/* Section Label */}
-        <div className="mb-12 flex items-center justify-center gap-4">
+        <div className="animate-up mb-12 flex items-center justify-center gap-4">
           <span
             className="text-sm font-black text-[var(--lime)]"
             style={{
@@ -76,7 +94,7 @@ export function ManifestSection() {
 
         {/* Section Title */}
         <h2
-          className="mb-16 text-5xl leading-[0.9] font-black text-white uppercase md:text-7xl lg:text-8xl"
+          className="animate-up mb-16 text-5xl leading-[0.9] font-black text-white uppercase md:text-7xl lg:text-8xl"
           style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: 'var(--tracking-ultra)' }}
         >
           Mécanique de précision
