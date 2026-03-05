@@ -7,9 +7,22 @@ export function HeroSection() {
       className="noise relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 py-32"
       style={{ background: 'var(--black)' }}
     >
+      {/* Abstract Background Image with Gradient Fade */}
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <Image
+          src="/hero-abstract-bg-okokok.jpg"
+          alt="Abstract Dark Background"
+          fill
+          className="object-cover object-center opacity-60 mix-blend-screen"
+          priority
+        />
+        {/* Gradient overlay: starts black at top, fades to transparent, then black at bottom */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
+      </div>
+
       {/* Background grid lines */}
       <div
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none absolute inset-0 z-0"
         style={{
           backgroundImage:
             'linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)',

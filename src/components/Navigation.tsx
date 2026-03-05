@@ -26,7 +26,7 @@ export function Navigation() {
           style={{ textDecoration: 'none' }}
         >
           <Image
-            src="/logo-blanc.svg"
+            src="/logo-blancvert.svg"
             alt="BenchAgency Logo"
             width={180}
             height={40}
