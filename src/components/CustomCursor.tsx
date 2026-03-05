@@ -7,6 +7,7 @@ export function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null)
   const labelRef = useRef<HTMLSpanElement>(null)
   const [cursorClass, setCursorClass] = useState('')
+  const [isVisible, setIsVisible] = useState(false)
   const pos = useRef({ x: -100, y: -100 })
   const current = useRef({ x: -100, y: -100 })
   const rafRef = useRef<number>(0)
@@ -15,6 +16,15 @@ export function CustomCursor() {
     // For a pixelated cursor, instant tracking feels best (retro style)
     const onMove = (e: MouseEvent) => {
       pos.current = { x: e.clientX, y: e.clientY }
+      if (!isVisible) setIsVisible(true)
+    }
+
+    const onMouseLeave = () => {
+      setIsVisible(false)
+    }
+
+    const onMouseEnter = () => {
+      setIsVisible(true)
     }
 
     const tick = () => {
@@ -35,6 +45,8 @@ export function CustomCursor() {
     const onLeavePortfolio = () => setCursorClass('')
 
     window.addEventListener('mousemove', onMove)
+    document.addEventListener('mouseleave', onMouseLeave)
+    document.addEventListener('mouseenter', onMouseEnter)
     rafRef.current = requestAnimationFrame(tick)
 
     const addListeners = () => {
@@ -55,6 +67,8 @@ export function CustomCursor() {
 
     return () => {
       window.removeEventListener('mousemove', onMove)
+      document.removeEventListener('mouseleave', onMouseLeave)
+      document.removeEventListener('mouseenter', onMouseEnter)
       cancelAnimationFrame(rafRef.current)
       observer.disconnect()
     }
@@ -64,7 +78,11 @@ export function CustomCursor() {
     <div
       ref={cursorRef}
       className={`fixed top-0 left-0 pointer-events-none z-[9999] transition-transform duration-75 ease-out ${cursorClass}`}
-      style={{ transform: 'translate(-100px, -100px)' }}
+      style={{
+        transform: 'translate(-100px, -100px)',
+        opacity: isVisible ? 1 : 0,
+        transition: 'opacity 0.2s ease, transform 0.075s ease-out'
+      }}
     >
       {/* Pixel Hand PNG provided by the user */}
       <Image
