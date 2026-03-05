@@ -1,5 +1,3 @@
-import { Particles } from './ui/particles'
-
 export function HeroSection() {
   return (
     <section
@@ -17,15 +15,7 @@ export function HeroSection() {
         }}
       />
 
-      <div className="absolute inset-0 z-0 h-full w-full">
-        <Particles
-          className="absolute inset-0 h-full w-full"
-          quantity={150}
-          ease={80}
-          color="#d1ff00"
-          refresh
-        />
-      </div>
+
 
       <div className="relative z-10 flex w-full max-w-7xl flex-col items-center text-center">
         {/* Intro label */}
