@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 
 const navLinks = [
   { label: 'Manifeste', href: '#manifeste' },
@@ -24,15 +25,14 @@ export function Navigation() {
           className="flex items-center gap-2 text-white"
           style={{ textDecoration: 'none' }}
         >
-          <span
-            className="text-2xl font-bold tracking-widest"
-            style={{
-              fontFamily: "'Bebas Neue', sans-serif",
-              letterSpacing: 'var(--tracking-tight)',
-            }}
-          >
-            BENCH<span style={{ color: 'var(--lime)' }}>AGENCY</span>
-          </span>
+          <Image
+            src="/logo-blanc.svg"
+            alt="BenchAgency Logo"
+            width={180}
+            height={40}
+            className="h-8 w-auto md:h-10"
+            priority
+          />
         </a>
 
         {/* Desktop links */}

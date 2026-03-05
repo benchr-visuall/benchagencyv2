@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 const MARQUEE_TEXT =
   'Ø LOYER · Ø MAINTENANCE · Ø STRESS · Ø LOYER · Ø MAINTENANCE · Ø STRESS · Ø LOYER · Ø MAINTENANCE · Ø STRESS · '
 
@@ -38,18 +40,13 @@ export function Footer() {
         <div className="flex flex-col items-center gap-16 md:flex-row md:items-start md:justify-between">
           {/* Logo & Mission (Centered on mobile, Left on Desktop) */}
           <div className="flex flex-col items-center gap-8 text-center md:items-start md:text-left">
-            <span
-              className="text-6xl leading-none font-black text-white md:text-8xl"
-              style={{
-                fontFamily: "'Bebas Neue', sans-serif",
-                letterSpacing: 'var(--tracking-ultra)',
-              }}
-            >
-              BENCH
-              <span style={{ color: 'var(--lime)', textShadow: '0 0 40px rgba(209,255,0,0.2)' }}>
-                AGENCY
-              </span>
-            </span>
+            <Image
+              src="/logo-blanc.svg"
+              alt="BenchAgency Logo"
+              width={320}
+              height={80}
+              className="h-16 w-auto md:h-20"
+            />
             <p className="max-w-xs text-sm leading-relaxed font-medium tracking-widest text-gray-400 uppercase">
               Ingénierie créative d&apos;élite.
               <br />

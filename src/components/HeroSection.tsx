@@ -20,18 +20,8 @@ export function HeroSection() {
 
 
       <div className="relative z-10 flex w-full max-w-7xl flex-col items-center text-center">
-        {/* Intro label */}
-        <div className="mb-6 flex items-center justify-center gap-4">
-          <span className="h-px w-12 bg-white/20" />
-          <span className="text-xs font-bold tracking-[0.2em] text-gray-400 uppercase">
-            Creative Engineering — Annecy - Genève
-          </span>
-          <span className="h-px w-12 bg-white/20" />
-        </div>
-
-        {/* Center Logo matching exact text width of "Creative Engineering — Annecy - Genève" */}
-        {/* On average, that specific uppercase string at text-xs + letter-spacing is roughly ~380px wide. */}
-        <div className="mb-10 flex w-full max-w-[380px] justify-center">
+        {/* Top Logo (Reduced size by 50%) */}
+        <div className="mb-8 flex w-full max-w-[190px] justify-center">
           <Image
             src="/picto-vert.svg"
             alt="BenchAgency Logo Picto"
@@ -40,6 +30,15 @@ export function HeroSection() {
             className="h-auto w-full animate-pulse object-contain opacity-80 mix-blend-screen"
             priority
           />
+        </div>
+
+        {/* Intro label */}
+        <div className="mb-10 flex items-center justify-center gap-4">
+          <span className="h-px w-12 bg-white/20" />
+          <span className="text-xs font-bold tracking-[0.2em] text-gray-400 uppercase">
+            Creative Engineering — Annecy - Genève
+          </span>
+          <span className="h-px w-12 bg-white/20" />
         </div>
 
         {/* Main Title */}
@@ -61,9 +60,9 @@ export function HeroSection() {
           </span>
         </h1>
 
-        {/* Subtitle */}
+        {/* Subtitle (Increased by 60%) */}
         <p
-          className="mx-auto mb-20 max-w-4xl text-lg leading-none font-bold tracking-tight text-white uppercase md:text-xl"
+          className="mx-auto mb-20 max-w-5xl text-3xl leading-none font-bold tracking-tight text-white uppercase md:text-4xl"
           style={{
             fontFamily: "'Bebas Neue', sans-serif",
             letterSpacing: 'var(--tracking-readable)',
@@ -131,6 +130,6 @@ export function HeroSection() {
           <path d="M12 8v4"></path>
         </svg>
       </div>
-    </section>
+    </section >
   )
 }
