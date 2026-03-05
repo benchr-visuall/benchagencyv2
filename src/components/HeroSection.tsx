@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 export function HeroSection() {
   return (
     <section
@@ -19,7 +21,7 @@ export function HeroSection() {
 
       <div className="relative z-10 flex w-full max-w-7xl flex-col items-center text-center">
         {/* Intro label */}
-        <div className="mb-12 flex items-center justify-center gap-4">
+        <div className="mb-6 flex items-center justify-center gap-4">
           <span className="h-px w-12 bg-white/20" />
           <span className="text-xs font-bold tracking-[0.2em] text-gray-400 uppercase">
             Creative Engineering — Annecy - Genève
@@ -27,25 +29,41 @@ export function HeroSection() {
           <span className="h-px w-12 bg-white/20" />
         </div>
 
+        {/* Center Logo matching exact text width of "Creative Engineering — Annecy - Genève" */}
+        {/* On average, that specific uppercase string at text-xs + letter-spacing is roughly ~380px wide. */}
+        <div className="mb-10 flex w-full max-w-[380px] justify-center">
+          <Image
+            src="/picto-vert.svg"
+            alt="BenchAgency Logo Picto"
+            width={400}
+            height={400}
+            className="h-auto w-full animate-pulse object-contain opacity-80 mix-blend-screen"
+            priority
+          />
+        </div>
+
         {/* Main Title */}
         <h1
-          className="mb-8 flex flex-col items-center text-[clamp(3.5rem,9vw,7rem)] leading-[0.9] font-black tracking-tight text-white uppercase"
+          className="mb-8 flex flex-col items-center text-[clamp(2.5rem,7vw,6.5rem)] leading-[0.85] font-black tracking-tight text-white uppercase xl:text-[7.5rem]"
           style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: 'var(--tracking-ultra)' }}
         >
           <span>
             Nous forgeons{' '}
-            <span style={{ color: 'var(--lime)', textShadow: '0 0 40px rgba(209,255,0,0.3)' }}>
+            <span style={{ color: 'var(--lime)', textShadow: '0 0 50px rgba(209,255,0,0.3)' }}>
               votre image.
             </span>
           </span>
           <span>
-            Nous simplifions <span style={{ color: 'var(--lime)' }}>votre site web.</span>
+            Nous simplifions{' '}
+            <span style={{ color: 'var(--lime)', textShadow: '0 0 50px rgba(209,255,0,0.3)' }}>
+              votre site web.
+            </span>
           </span>
         </h1>
 
         {/* Subtitle */}
         <p
-          className="mx-auto mb-16 max-w-4xl text-xl leading-none font-bold tracking-tight text-white lowercase md:text-2xl"
+          className="mx-auto mb-20 max-w-4xl text-lg leading-none font-bold tracking-tight text-white uppercase md:text-xl"
           style={{
             fontFamily: "'Bebas Neue', sans-serif",
             letterSpacing: 'var(--tracking-readable)',
