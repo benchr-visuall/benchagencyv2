@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 
 export function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null)
@@ -11,17 +12,19 @@ export function CustomCursor() {
   const rafRef = useRef<number>(0)
 
   useEffect(() => {
-    const lerp = (a: number, b: number, t: number) => a + (b - a) * t
-
+    // For a pixelated cursor, instant tracking feels best (retro style)
     const onMove = (e: MouseEvent) => {
       pos.current = { x: e.clientX, y: e.clientY }
     }
 
     const tick = () => {
-      current.current.x = lerp(current.current.x, pos.current.x, 0.12)
-      current.current.y = lerp(current.current.y, pos.current.y, 0.12)
+      // Instant movement for the retro feel
+      current.current.x = pos.current.x
+      current.current.y = pos.current.y
+
       if (cursorRef.current) {
-        cursorRef.current.style.transform = `translate(${current.current.x - cursorRef.current.offsetWidth / 2}px, ${current.current.y - cursorRef.current.offsetHeight / 2}px)`
+        // Offset so the pointer tip (top left of the hand) is exactly at the mouse coordinates
+        cursorRef.current.style.transform = `translate(${current.current.x - 2}px, ${current.current.y - 2}px)`
       }
       rafRef.current = requestAnimationFrame(tick)
     }
@@ -47,7 +50,6 @@ export function CustomCursor() {
 
     addListeners()
 
-    // Re-scan on DOM mutations
     const observer = new MutationObserver(addListeners)
     observer.observe(document.body, { childList: true, subtree: true })
 
@@ -61,13 +63,26 @@ export function CustomCursor() {
   return (
     <div
       ref={cursorRef}
-      className={`custom-cursor ${cursorClass}`}
+      className={`fixed top-0 left-0 pointer-events-none z-[9999] transition-transform duration-75 ease-out ${cursorClass}`}
       style={{ transform: 'translate(-100px, -100px)' }}
     >
+      {/* Pixel Hand PNG provided by the user */}
+      <Image
+        src="/pixcursor.png"
+        alt="Custom Cursor"
+        width={38}
+        height={44}
+        className={cursorClass === 'voir' ? 'scale-125 transition-transform' : 'transition-transform'}
+        style={{
+          filter: 'drop-shadow(2px 2px 0px rgba(0,0,0,0.4)) drop-shadow(0px 0px 1px white)'
+        }}
+        priority
+      />
+
       {cursorClass === 'voir' && (
         <span
           ref={labelRef}
-          className="absolute inset-0 flex items-center justify-center text-[10px] font-bold tracking-widest text-black"
+          className="absolute -right-8 top-1/2 -translate-y-1/2 rounded bg-[var(--lime)] px-2 py-1 text-[10px] font-black tracking-widest text-black shadow-lg"
         >
           VOIR
         </span>
