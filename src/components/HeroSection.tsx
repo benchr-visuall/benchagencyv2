@@ -33,8 +33,8 @@ export function HeroSection() {
 
 
       <div className="relative z-10 flex w-full max-w-7xl flex-col items-center text-center">
-        {/* Top Logo (Reduced size by 50%) */}
-        <div className="mb-8 flex w-full max-w-[190px] justify-center">
+        {/* Top Logo (Reduced size by 15% more) */}
+        <div className="mb-8 flex w-full max-w-[160px] justify-center">
           <Image
             src="/picto-vert.svg"
             alt="BenchAgency Logo Picto"
@@ -56,7 +56,7 @@ export function HeroSection() {
 
         {/* Main Title */}
         <h1
-          className="mb-8 flex flex-col items-center text-[clamp(2.5rem,7vw,6.5rem)] leading-[0.85] font-black tracking-tight text-white uppercase xl:text-[7.5rem]"
+          className="mb-8 flex flex-col items-center text-[clamp(2.1rem,6vw,5.5rem)] leading-[0.85] font-black tracking-tight text-white uppercase xl:text-[6.4rem]"
           style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: 'var(--tracking-ultra)' }}
         >
           <span>
@@ -73,9 +73,9 @@ export function HeroSection() {
           </span>
         </h1>
 
-        {/* Subtitle (Increased by 60%) */}
+        {/* Subtitle (Adjusted size) */}
         <p
-          className="mx-auto mb-20 max-w-5xl text-3xl leading-none font-bold tracking-tight text-white uppercase md:text-4xl"
+          className="mx-auto mb-20 max-w-5xl text-2xl leading-none font-bold tracking-tight text-white uppercase md:text-3xl"
           style={{
             fontFamily: "'Bebas Neue', sans-serif",
             letterSpacing: 'var(--tracking-readable)',
