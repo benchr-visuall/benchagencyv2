@@ -12,13 +12,14 @@ const OFFRES = [
     tier: 'Basic',
     tagline: "L'essentiel en une page.",
     description: 'Pour être en ligne hier.',
-    price: '590',
+    price: '690',
     features: [
-      '1 page optimisée',
-      'Responsive mobile',
-      'SEO technique',
-      'Livraison 24h',
-      'Hébergement inclus 1an',
+      'Landing page (page unique)',
+      'Design 100% Responsive',
+      'Livraison en 48h',
+      'Nom de domaine + Hébergement (1 an)',
+      'Conforme RGPD',
+      'Formulaire de contact',
     ],
     featured: false,
   },
@@ -27,8 +28,15 @@ const OFFRES = [
     tier: 'Multi',
     tagline: 'La vitrine complète.',
     description: 'Pour asseoir votre autorité sur tous vos métiers.',
-    price: '990',
-    features: ["Jusqu'à 5 pages", 'Blog intégré', 'Formulaire contact', 'Analytics', 'SEO avancé'],
+    price: '1190',
+    features: [
+      'Intégralité du pack BASIC inclut +',
+      "Site multi page (jusqu'à 5 pages)",
+      'Livraison en 72h',
+      'Maillage interne (SEO optimisé par page)',
+      'Architecture de navigation fluide',
+      '1 Module au choix (WhatsApp / Réservation / Chat box...)',
+    ],
     featured: true,
   },
   {
@@ -36,13 +44,14 @@ const OFFRES = [
     tier: 'Signature',
     tagline: "L'exception visuelle.",
     description: 'Un design artisanal pour marquer les esprits.',
-    price: '1490',
+    price: '1890',
     features: [
-      'Design sur-mesure',
-      'Animations premium',
-      'CMS headless',
-      'Performance A+',
-      'Suivi 6 mois',
+      'Intégralité du pack MULTI inclut +',
+      'Design "Haute Couture" (100% sur-mesure)',
+      'Copywriting (Aide à la rédaction stratégique)',
+      'Livraison en 1 semaine',
+      'Modules supplémentaire illimités',
+      "Modifications illimitées jusqu'à satisfaction",
     ],
     featured: false,
   },
@@ -51,6 +60,7 @@ const OFFRES = [
 export function OffresSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const cardRefs = useRef<(HTMLDivElement | null)[]>([])
+  const sprintRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -88,13 +98,30 @@ export function OffresSection() {
     const rect = card.getBoundingClientRect()
     const x = e.clientX - rect.left - rect.width / 2
     const y = e.clientY - rect.top - rect.height / 2
-    const rotateX = (-y / rect.height) * 12
-    const rotateY = (x / rect.width) * 12
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`
+    const rotateX = (-y / rect.height) * 22
+    const rotateY = (x / rect.width) * 22
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`
   }
 
   const handleMouseLeave = (idx: number) => {
     const card = cardRefs.current[idx]
+    if (!card) return
+    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)'
+  }
+
+  const handleMouseMoveSprint = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = sprintRef.current
+    if (!card) return
+    const rect = card.getBoundingClientRect()
+    const x = e.clientX - rect.left - rect.width / 2
+    const y = e.clientY - rect.top - rect.height / 2
+    const rotateX = (-y / rect.height) * 15
+    const rotateY = (x / rect.width) * 15
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`
+  }
+
+  const handleMouseLeaveSprint = () => {
+    const card = sprintRef.current
     if (!card) return
     card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)'
   }
@@ -147,28 +174,22 @@ export function OffresSection() {
                 }}
                 onMouseMove={(e) => handleMouseMove(e, idx)}
                 onMouseLeave={() => handleMouseLeave(idx)}
-                className="group relative flex h-full flex-col gap-8 rounded-3xl border border-white/10 bg-white/[0.01] px-8 py-12 text-left backdrop-blur-xl transition-all duration-500 hover:bg-white/[0.03] active:scale-95"
+                className="card-3d group relative flex h-full flex-col gap-8 rounded-3xl border border-white/10 bg-white/[0.01] px-8 py-12 text-left backdrop-blur-xl transition-colors duration-500 hover:bg-white/[0.03] hover:border-white/20"
                 style={{
                   boxShadow: offre.featured ? '0 0 40px rgba(209,255,0,0.05)' : 'none',
                   cursor: 'none',
                 }}
               >
-                {/* Animated Border Gradient */}
-                <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-                  <div className="absolute inset-0 animate-[border-glow_2s_linear_infinite] rounded-3xl border-[1.5px] border-[var(--lime)]" />
-                  <style jsx>{`
-                    @keyframes border-glow {
-                      0%,
-                      100% {
-                        opacity: 0.3;
-                        filter: blur(2px);
-                      }
-                      50% {
-                        opacity: 0.8;
-                        filter: blur(4px);
-                      }
-                    }
-                  `}</style>
+                {/* Continuous 3D Spinning Neon Border */}
+                <div 
+                  className="pointer-events-none absolute inset-0 z-[-1] rounded-3xl p-[1px] opacity-70"
+                  style={{
+                    WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                    WebkitMaskComposite: 'xor',
+                    maskComposite: 'exclude',
+                  }}
+                >
+                  <div className="absolute inset-[-100%] animate-[spin_4s_linear_infinite] bg-[conic-gradient(var(--lime)_0deg,transparent_90deg,transparent_180deg,var(--lime)_360deg)]" />
                 </div>
                 {offre.featured && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[var(--lime)] px-4 py-1 text-[10px] font-bold tracking-wider text-black uppercase shadow-[0_0_20px_rgba(209,255,0,0.5)]">
@@ -235,6 +256,59 @@ export function OffresSection() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Sprint Offer */}
+        <div className="animate-up relative mx-auto mt-24 w-full max-w-4xl">
+          {/* Outer Glow for Sprint */}
+          <div className="pointer-events-none absolute inset-0 animate-pulse rounded-[40px] bg-[var(--lime)] opacity-5 blur-xl" />
+          
+          <div
+            ref={sprintRef}
+            onMouseMove={handleMouseMoveSprint}
+            onMouseLeave={handleMouseLeaveSprint}
+            className="card-3d relative flex w-full flex-col items-center overflow-hidden rounded-3xl border border-[var(--lime)]/30 bg-black/80 p-12 text-center backdrop-blur-2xl transition-colors hover:border-[var(--lime)]/60 md:p-16"
+            style={{ cursor: 'none' }}
+          >
+            {/* Inner Rotating Border for Sprint */}
+            <div 
+              className="pointer-events-none absolute inset-0 z-[-1] rounded-3xl p-[1.5px] opacity-100"
+              style={{
+                WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                WebkitMaskComposite: 'xor',
+                maskComposite: 'exclude',
+              }}
+            >
+              <div className="absolute inset-[-100%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(var(--lime)_0deg,transparent_90deg,transparent_180deg,var(--lime)_360deg)]" />
+            </div>
+
+            <div className="mb-6 rounded-full border border-[var(--lime)] bg-[var(--lime)]/10 px-6 py-2 text-sm font-bold tracking-widest text-[var(--lime)] uppercase shadow-[0_0_15px_rgba(209,255,0,0.3)]">
+              Offre Sprint
+            </div>
+            <h3
+              className="mb-4 text-4xl font-black text-white uppercase md:text-6xl"
+              style={{
+                fontFamily: "'Bebas Neue', sans-serif",
+                letterSpacing: 'calc(var(--tracking-readable) - 1px)',
+              }}
+            >
+              Et si votre site ne vous coûtait rien ?
+            </h3>
+            <p className="mb-10 text-base leading-relaxed text-gray-300 md:text-xl md:max-w-2xl">
+              Nous ne dépensons pas d'argent en publicité. Nous préférons vous le donner.
+            </p>
+            <a
+              href="/sprint"
+              className="group relative flex h-20 w-auto min-w-[320px] items-center justify-center overflow-hidden rounded-full bg-[var(--lime)] px-10 text-lg font-black tracking-widest text-black uppercase transition-transform hover:scale-105 hover:shadow-[0_0_60px_rgba(209,255,0,0.6)]"
+            >
+              <span className="relative z-10 transition-colors duration-300 group-hover:text-black">
+                Votre site gratuit ?
+              </span>
+              <div
+                className="absolute inset-0 origin-left scale-x-0 bg-white transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-x-100"
+              />
+            </a>
+          </div>
         </div>
       </div>
     </section>
