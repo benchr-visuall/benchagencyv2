@@ -10,7 +10,7 @@ export function HeroSection() {
       {/* Abstract Background Image with Gradient Fade */}
       <div className="pointer-events-none absolute inset-0 z-0">
         <Image
-          src="/hero-abstract-bg-okokok.jpg"
+          src="/okokok.webp"
           alt="Abstract Dark Background"
           fill
           className="object-cover object-center opacity-60 mix-blend-screen"
@@ -33,8 +33,8 @@ export function HeroSection() {
 
 
       <div className="relative z-10 flex w-full max-w-7xl flex-col items-center text-center">
-        {/* Top Logo (Reduced size by 15% more) */}
-        <div className="mb-8 flex w-full max-w-[160px] justify-center">
+        {/* Top Logo (Adjusted size) */}
+        <div className="mb-8 flex w-full max-w-[140px] justify-center">
           <Image
             src="/picto-vert.svg"
             alt="BenchAgency Logo Picto"
@@ -56,8 +56,8 @@ export function HeroSection() {
 
         {/* Main Title */}
         <h1
-          className="mb-8 flex flex-col items-center text-[clamp(2.1rem,6vw,5.5rem)] leading-[0.85] font-black tracking-tight text-white uppercase xl:text-[6.4rem]"
-          style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: 'var(--tracking-ultra)' }}
+          className="mb-8 flex flex-col items-center text-[clamp(1.75rem,5vw,4.5rem)] leading-[0.85] font-black tracking-tight text-white uppercase xl:text-[5.3rem]"
+          style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: 'calc(var(--tracking-readable) - 1px)' }}
         >
           <span>
             Nous forgeons{' '}
@@ -78,7 +78,7 @@ export function HeroSection() {
           className="mx-auto mb-20 max-w-5xl text-2xl leading-none font-bold tracking-tight text-white uppercase md:text-3xl"
           style={{
             fontFamily: "'Bebas Neue', sans-serif",
-            letterSpacing: 'var(--tracking-readable)',
+            letterSpacing: '0.04em',
           }}
         >
           un brief ce matin. votre site{' '}
@@ -86,24 +86,27 @@ export function HeroSection() {
         </p>
 
         {/* Stats & CTA Row */}
-        <div className="flex flex-col items-center gap-12 md:flex-row md:justify-center md:gap-24">
-          <div className="flex gap-12 text-left">
+        <div className="flex flex-col items-center gap-6 md:flex-row md:justify-center md:gap-12">
+          <div className="flex gap-12">
             {[
               { value: '24H', label: 'Déploiement' },
               { value: '0€', label: 'Loyer mensuel' },
               { value: '100%', label: 'Propriété' },
             ].map((stat) => (
-              <div key={stat.label} className="flex flex-col gap-1">
+              <div key={stat.label} className="flex flex-col items-center gap-1 text-center">
                 <span
-                  className="text-4xl font-black text-white md:text-5xl"
+                  className="text-5xl font-black text-white md:text-6xl"
                   style={{
                     fontFamily: "'Bebas Neue', sans-serif",
-                    letterSpacing: 'var(--tracking-tight)',
+                    letterSpacing: 'calc(var(--tracking-readable) - 1px)',
                   }}
                 >
                   {stat.value}
                 </span>
-                <span className="text-[10px] tracking-[0.1em] text-gray-500 uppercase">
+                <span
+                  className="text-xs text-gray-500 uppercase"
+                  style={{ letterSpacing: 'calc(var(--tracking-readable) - 1px)' }}
+                >
                   {stat.label}
                 </span>
               </div>
@@ -112,18 +115,25 @@ export function HeroSection() {
 
           <div className="hidden h-16 w-px bg-white/10 md:block" />
 
-          <a
-            href="#contact"
-            className="group relative flex h-16 w-64 items-center justify-center overflow-hidden rounded-full bg-white text-sm font-bold tracking-wider text-black uppercase transition-all duration-500"
-          >
-            <span className="relative z-10 transition-colors duration-300 group-hover:text-black">
-              Un café et un site?
-            </span>
-            <div
-              className="absolute inset-0 origin-left scale-x-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-x-100"
-              style={{ background: 'var(--lime)' }}
-            />
-          </a>
+          {/* Animated Spinning Outline Wrapper */}
+          <div className="relative group flex h-16 w-64 items-center justify-center overflow-hidden rounded-full p-[2px]">
+            {/* The spinning background */}
+            <div className="absolute inset-[-500%] animate-[spin_4s_linear_infinite] bg-[conic-gradient(var(--lime)_0deg,transparent_90deg,transparent_180deg,var(--lime)_360deg)]" />
+            
+            {/* The actual button content over the spinning background */}
+            <a
+              href="#contact"
+              className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-white text-sm font-bold tracking-wider text-black uppercase transition-all duration-500"
+            >
+              <span className="relative z-10 transition-colors duration-300 group-hover:text-black">
+                Un café et un site?
+              </span>
+              <div
+                className="absolute inset-0 origin-left scale-x-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-x-100"
+                style={{ background: 'var(--lime)' }}
+              />
+            </a>
+          </div>
         </div>
       </div>
 

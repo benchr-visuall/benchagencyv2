@@ -84,8 +84,8 @@ export function EvolutionSection() {
 
         {/* Title */}
         <h2
-          className="animate-up mb-12 text-5xl leading-[0.9] font-black tracking-tighter uppercase md:text-7xl lg:text-9xl"
-          style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: 'var(--tracking-ultra)' }}
+          className="animate-up mb-12 text-5xl leading-[0.9] font-black uppercase md:text-7xl lg:text-9xl"
+          style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: 'calc(var(--tracking-readable) - 1px)' }}
         >
           Votre site <span className="text-black">évolue</span> <br />
           avec vous.

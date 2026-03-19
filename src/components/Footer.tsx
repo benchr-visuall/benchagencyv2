@@ -41,7 +41,7 @@ export function Footer() {
           {/* Logo & Mission (Centered on mobile, Left on Desktop) */}
           <div className="flex flex-col items-center gap-8 text-center md:items-start md:text-left">
             <Image
-              src="/logo-blanc.svg"
+              src="/bench-agency-logo.svg"
               alt="BenchAgency Logo"
               width={320}
               height={80}

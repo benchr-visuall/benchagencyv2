@@ -95,7 +95,7 @@ export function ManifestSection() {
         {/* Section Title */}
         <h2
           className="animate-up mb-16 text-5xl leading-[0.9] font-black text-white uppercase md:text-7xl lg:text-8xl"
-          style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: 'var(--tracking-ultra)' }}
+          style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: 'calc(var(--tracking-readable) - 1px)' }}
         >
           Mécanique de précision
           <br />

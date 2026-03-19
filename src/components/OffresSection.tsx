@@ -128,7 +128,7 @@ export function OffresSection() {
         {/* Title */}
         <h2
           className="animate-up mb-24 text-5xl leading-[0.9] font-black text-white uppercase md:text-7xl lg:text-8xl"
-          style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: 'var(--tracking-ultra)' }}
+          style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: 'calc(var(--tracking-readable) - 1px)' }}
         >
           On adapte la{' '}
           <span style={{ color: 'var(--lime)', textShadow: '0 0 40px rgba(209,255,0,0.2)' }}>
