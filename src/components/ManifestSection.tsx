@@ -68,9 +68,9 @@ export function ManifestSection() {
 
   return (
     <section
-      id="manifeste"
+      id="pourquoi-nous"
       ref={sectionRef}
-      className="noise relative flex flex-col items-center border-t border-white/5 px-6 py-32 md:py-48"
+      className="relative flex flex-col items-center border-t border-white/5 px-6 py-32 md:py-48"
       style={{ background: 'var(--black)' }}
     >
       <div className="mx-auto flex w-full max-w-5xl flex-col items-center text-center">
@@ -85,17 +85,20 @@ export function ManifestSection() {
           >
             02
           </span>
-          <span className="h-px w-8 bg-white/20" />
+          <span className="h-px w-12 bg-white/20" />
           <span className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase">
-            Manifeste
+            Pourquoi nous
           </span>
-          <span className="h-px w-8 bg-white/20" />
+          <span className="h-px w-12 bg-white/20" />
         </div>
 
         {/* Section Title */}
         <h2
           className="animate-up mb-16 text-5xl leading-[0.9] font-black text-white uppercase md:text-7xl lg:text-8xl"
-          style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: 'calc(var(--tracking-readable) - 1px)' }}
+          style={{ 
+            fontFamily: "'Bebas Neue', sans-serif", 
+            letterSpacing: 'calc(var(--tracking-readable) - 1px)' 
+          }}
         >
           Mécanique de précision
           <br />

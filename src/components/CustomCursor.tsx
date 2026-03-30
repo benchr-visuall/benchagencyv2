@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import Image from 'next/image'
 
 export function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null)
@@ -33,8 +32,8 @@ export function CustomCursor() {
       current.current.y = pos.current.y
 
       if (cursorRef.current) {
-        // Offset so the pointer tip (top left of the hand) is exactly at the mouse coordinates
-        cursorRef.current.style.transform = `translate(${current.current.x - 2}px, ${current.current.y - 2}px)`
+        // Offset so the tip of the arrow (top left) is exactly at the mouse coordinates
+        cursorRef.current.style.transform = `translate(${current.current.x}px, ${current.current.y}px)`
       }
       rafRef.current = requestAnimationFrame(tick)
     }
@@ -84,23 +83,24 @@ export function CustomCursor() {
         transition: 'opacity 0.2s ease, transform 0.075s ease-out'
       }}
     >
-      {/* Pixel Hand PNG provided by the user */}
-      <Image
-        src="/pixcursor.png"
-        alt="Custom Cursor"
-        width={38}
-        height={44}
+      {/* Standard Arrow Cursor in Lime Green */}
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="var(--lime)"
         className={cursorClass === 'voir' ? 'scale-125 transition-transform' : 'transition-transform'}
         style={{
-          filter: 'drop-shadow(2px 2px 0px rgba(0,0,0,0.4)) drop-shadow(0px 0px 1px white)'
+          filter: 'drop-shadow(2px 2px 2px rgba(0,0,0,0.5))',
         }}
-        priority
-      />
+      >
+        <path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.83-4.83 2.3 5.17c.14.33.52.48.84.34l2.21-.98c.32-.14.47-.52.33-.84l-2.3-5.17h6.81c.45 0 .67-.54.35-.85L6.35 2.86c-.31-.31-.85-.09-.85.35z" />
+      </svg>
 
       {cursorClass === 'voir' && (
         <span
           ref={labelRef}
-          className="absolute -right-8 top-1/2 -translate-y-1/2 rounded bg-[var(--lime)] px-2 py-1 text-[10px] font-black tracking-widest text-black shadow-lg"
+          className="absolute left-6 top-1/2 -translate-y-1/2 rounded bg-[var(--lime)] px-2 py-1 text-[10px] font-black tracking-widest text-black shadow-lg"
         >
           VOIR
         </span>

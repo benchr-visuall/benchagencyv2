@@ -41,9 +41,9 @@ export function StudioSection() {
 
   return (
     <section
-      id="studio"
+      id="studio-360"
       ref={sectionRef}
-      className="noise relative flex flex-col items-center border-t border-white/5 px-6 py-32 md:py-48"
+      className="relative flex flex-col items-center border-t border-white/5 px-6 py-32 md:py-48"
       style={{ background: 'var(--black)' }}
     >
       <div className="mx-auto flex w-full max-w-7xl flex-col items-center text-center">
@@ -58,17 +58,20 @@ export function StudioSection() {
           >
             04
           </span>
-          <span className="h-px w-8 bg-white/20" />
-          <span className="text-xs font-bold tracking-widest text-gray-400 uppercase">
-            Le Studio 360°
+          <span className="h-px w-12 bg-white/20" />
+          <span className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase">
+            Studio 360°
           </span>
-          <span className="h-px w-8 bg-white/20" />
+          <span className="h-px w-12 bg-white/20" />
         </div>
 
         {/* Title */}
         <h2
-          className="animate-up mb-24 text-5xl leading-[0.9] font-black text-white uppercase md:text-7xl lg:text-8xl"
-          style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: 'calc(var(--tracking-readable) - 1px)' }}
+          className="animate-up mb-8 text-5xl leading-[0.9] font-black text-white uppercase md:text-7xl lg:text-8xl"
+          style={{ 
+            fontFamily: "'Bebas Neue', sans-serif", 
+            letterSpacing: 'calc(var(--tracking-readable) - 1px)' 
+          }}
         >
           Nous sommes{' '}
           <span style={{ color: 'var(--lime)', textShadow: '0 0 40px rgba(209,255,0,0.2)' }}>
@@ -76,48 +79,38 @@ export function StudioSection() {
           </span>
         </h2>
 
+        <p className="animate-up mx-auto mb-20 max-w-5xl text-base font-medium tracking-widest uppercase md:text-lg">
+          <span className="text-[var(--lime)]">On ne fait pas que du web.</span>{' '}
+          <span className="text-white">On crée des marques qui marquent.</span>
+        </p>
+
         {/* Centered Bento Grid */}
         <div className="cards-grid grid w-full grid-cols-1 gap-6 md:grid-cols-3">
           {/* Block 01 */}
-          <div className="animate-card group relative flex flex-col items-start justify-between rounded-3xl border border-white/10 bg-white/[0.02] p-10 text-left transition-colors duration-500 hover:border-[var(--lime)] hover:bg-white/[0.04]">
-            <div className="mb-12 flex w-full items-center justify-between">
-              <span className="rounded-full border border-white/10 px-4 py-1 text-xs font-bold tracking-widest text-gray-400 uppercase">
-                01
-              </span>
-              <span className="text-2xl text-[var(--lime)] opacity-0 transition-opacity group-hover:opacity-100">
-                ↗
-              </span>
-            </div>
+          <div className="animate-card group relative flex flex-col items-start justify-between rounded-3xl border border-white/10 bg-white/[0.02] p-8 text-left transition-colors duration-500 hover:border-[var(--lime)] hover:bg-white/[0.04]">
             <div>
               <h3
-                className="mb-4 text-4xl font-black tracking-wider text-white uppercase"
+                className="mb-4 text-4xl font-black tracking-wider text-[var(--lime)] uppercase"
                 style={{
                   fontFamily: "'Bebas Neue', sans-serif",
                   letterSpacing: 'var(--tracking-readable)',
                 }}
               >
-                Identité Graphique
+                Identité Visuelle
               </h3>
               <p className="max-w-md text-sm leading-relaxed text-gray-400">
-                Vous forgez une image qui impose le respect. Direction artistique complète,
-                branding, logotype et guidelines.
+                Nous créons des marques qui imposent le respect. De la conception du logotype à
+                la charte graphique complète, nous forgeons une image de marque cohérente et
+                mémorable qui vous démarque radicalement de la concurrence.
               </p>
             </div>
           </div>
 
           {/* Block 02 */}
-          <div className="animate-card group relative flex flex-col items-start justify-between rounded-3xl border border-white/10 bg-white/[0.02] p-10 text-left transition-colors duration-500 hover:border-[var(--lime)] hover:bg-white/[0.04]">
-            <div className="mb-12 flex w-full items-center justify-between">
-              <span className="rounded-full border border-white/10 px-4 py-1 text-xs font-bold tracking-widest text-gray-400 uppercase">
-                02
-              </span>
-              <span className="text-2xl text-[var(--lime)] opacity-0 transition-opacity group-hover:opacity-100">
-                ↗
-              </span>
-            </div>
+          <div className="animate-card group relative flex flex-col items-start justify-between rounded-3xl border border-white/10 bg-white/[0.02] p-8 text-left transition-colors duration-500 hover:border-[var(--lime)] hover:bg-white/[0.04]">
             <div>
               <h3
-                className="mb-4 text-4xl font-black tracking-wider text-white uppercase"
+                className="mb-4 text-4xl font-black tracking-wider text-[var(--lime)] uppercase"
                 style={{
                   fontFamily: "'Bebas Neue', sans-serif",
                   letterSpacing: 'var(--tracking-readable)',
@@ -126,24 +119,18 @@ export function StudioSection() {
                 Production Média
               </h3>
               <p className="text-sm leading-relaxed text-gray-400">
-                Valorisez vos projets par la photo, vidéo, conception 3D et réalisation par drone.
+                Donnez du poids à vos idées. Que ce soit pour des campagnes Instagram, des films
+                publicitaires nous produisons des contenus visuels percutants conçus pour
+                capter l'attention en moins de 2 secondes
               </p>
             </div>
           </div>
 
           {/* Block 03 - Wide block */}
-          <div className="animate-card group relative flex flex-col items-start justify-between rounded-3xl border border-white/10 bg-white/[0.02] p-10 text-left transition-colors duration-500 hover:border-[var(--lime)] hover:bg-white/[0.04]">
-            <div className="mb-12 flex w-full items-center justify-between">
-              <span className="rounded-full border border-white/10 px-4 py-1 text-xs font-bold tracking-widest text-gray-400 uppercase">
-                03
-              </span>
-              <span className="text-2xl text-[var(--lime)] opacity-0 transition-opacity group-hover:opacity-100">
-                ↗
-              </span>
-            </div>
+          <div className="animate-card group relative flex flex-col items-start justify-between rounded-3xl border border-white/10 bg-white/[0.02] p-8 text-left transition-colors duration-500 hover:border-[var(--lime)] hover:bg-white/[0.04]">
             <div>
               <h3
-                className="mb-4 text-4xl font-black tracking-wider text-white uppercase"
+                className="mb-4 text-4xl font-black tracking-wider text-[var(--lime)] uppercase"
                 style={{
                   fontFamily: "'Bebas Neue', sans-serif",
                   letterSpacing: 'var(--tracking-readable)',
@@ -152,11 +139,28 @@ export function StudioSection() {
                 Sound Design
               </h3>
               <p className="max-w-md text-sm leading-relaxed text-gray-400">
-                Signez vos contenus avec une composition sur-mesure et une conception sonore
-                immersive. L'audio fait 50% de l'impact visuel.
+                L'audio représente 50% de l'impact émotionnel. Nous créons des compositions
+                sonores et des identités audio sur-mesure pour donner un son à votre marque et
+                rendre vos contenus vidéos inoubliables.
               </p>
             </div>
           </div>
+        </div>
+
+        {/* CTA */}
+        <div className="animate-up mt-16 flex justify-center">
+          <a
+            href="#contact"
+            onClick={() => window.dispatchEvent(new CustomEvent('select-service', { detail: 'studio' }))}
+            className="group relative flex h-16 w-auto min-w-[280px] items-center justify-center overflow-hidden rounded-full bg-[var(--lime)] px-10 text-base font-black tracking-widest text-black uppercase transition-transform hover:scale-105 hover:shadow-[0_0_40px_rgba(209,255,0,0.4)]"
+          >
+            <span className="relative z-10 transition-colors duration-300 group-hover:text-black">
+              On en discute ?
+            </span>
+            <div
+              className="absolute inset-0 origin-left scale-x-0 bg-white transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-x-100"
+            />
+          </a>
         </div>
       </div>
     </section>

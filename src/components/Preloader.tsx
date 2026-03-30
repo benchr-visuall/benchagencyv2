@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { usePathname } from 'next/navigation'
 
 const METRICS = [
   { label: 'PERFORMANCE', value: 99 },
@@ -9,39 +10,52 @@ const METRICS = [
 ]
 
 export function Preloader() {
+  const pathname = usePathname()
   const preloaderRef = useRef<HTMLDivElement>(null)
   const [count, setCount] = useState(0)
   const [done, setDone] = useState(false)
-  const [hidden, setHidden] = useState(false)
+  const [hidden, setHidden] = useState(true) // Default to hidden for SSR and safety
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    // Tick up counter
-    let n = 0
-    const interval = setInterval(() => {
-      n += 2
-      setCount(n)
-      if (n >= 100) clearInterval(interval)
-    }, 18)
+    setMounted(true)
+    try {
+      const hasLoaded = sessionStorage.getItem('bench_agency_loaded')
+      
+      if (hasLoaded || pathname === '/sprint') {
+        setHidden(true)
+      } else {
+        setHidden(false)
+        sessionStorage.setItem('bench_agency_loaded', 'true')
 
-    // After 2.2s open shutter
-    const tOpen = setTimeout(() => {
-      if (preloaderRef.current) {
-        preloaderRef.current.classList.add('open')
+        let n = 0
+        const interval = setInterval(() => {
+          n += 2
+          setCount(n)
+          if (n >= 100) clearInterval(interval)
+        }, 20)
+
+        const tOpen = setTimeout(() => {
+          if (preloaderRef.current) {
+            preloaderRef.current.classList.add('open')
+          }
+          setDone(true)
+        }, 2200)
+
+        const tHide = setTimeout(() => setHidden(true), 3200)
+
+        return () => {
+          clearInterval(interval)
+          clearTimeout(tOpen)
+          clearTimeout(tHide)
+        }
       }
-      setDone(true)
-    }, 2200)
-
-    // After shutter animation hide it completely
-    const tHide = setTimeout(() => setHidden(true), 3200)
-
-    return () => {
-      clearInterval(interval)
-      clearTimeout(tOpen)
-      clearTimeout(tHide)
+    } catch (e) {
+      setHidden(true) // Fail safe: hide if storage errors
     }
-  }, [])
+  }, [pathname])
 
-  if (hidden) return null
+  if (!mounted || hidden) return null
 
   return (
     <div ref={preloaderRef} className="preloader">

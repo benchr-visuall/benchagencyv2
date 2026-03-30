@@ -4,7 +4,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="noise relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 py-32"
+      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 py-32"
       style={{ background: 'var(--black)' }}
     >
       {/* Abstract Background Image with Gradient Fade */}
@@ -34,7 +34,7 @@ export function HeroSection() {
 
       <div className="relative z-10 flex w-full max-w-7xl flex-col items-center text-center">
         {/* Top Logo (Adjusted size) */}
-        <div className="mb-8 flex w-full max-w-[140px] justify-center">
+        <div className="relative z-[1000] mb-8 flex w-full max-w-[140px] justify-center">
           <Image
             src="/picto-vert.svg"
             alt="BenchAgency Logo Picto"
@@ -48,7 +48,7 @@ export function HeroSection() {
         {/* Intro label */}
         <div className="mb-10 flex items-center justify-center gap-4">
           <span className="h-px w-12 bg-white/20" />
-          <span className="text-xs font-bold tracking-[0.2em] text-gray-400 uppercase">
+          <span className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase">
             Creative Engineering — Annecy - Genève
           </span>
           <span className="h-px w-12 bg-white/20" />
@@ -91,7 +91,7 @@ export function HeroSection() {
             {[
               { value: '24H', label: 'Déploiement' },
               { value: '0€', label: 'Loyer mensuel' },
-              { value: '100%', label: 'Propriété' },
+              { value: '100%', label: 'à vous' },
             ].map((stat) => (
               <div key={stat.label} className="flex flex-col items-center gap-1 text-center">
                 <span
@@ -104,7 +104,7 @@ export function HeroSection() {
                   {stat.value}
                 </span>
                 <span
-                  className="text-xs text-gray-500 uppercase"
+                  className="text-xs font-bold text-[var(--lime)] uppercase"
                   style={{ letterSpacing: 'calc(var(--tracking-readable) - 1px)' }}
                 >
                   {stat.label}

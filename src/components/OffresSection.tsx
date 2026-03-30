@@ -145,17 +145,20 @@ export function OffresSection() {
           >
             03
           </span>
-          <span className="h-px w-8 bg-white/20" />
-          <span className="text-xs font-bold tracking-[0.15em] text-gray-400 uppercase">
+          <span className="h-px w-12 bg-white/20" />
+          <span className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase">
             Nos Offres
           </span>
-          <span className="h-px w-8 bg-white/20" />
+          <span className="h-px w-12 bg-white/20" />
         </div>
 
         {/* Title */}
         <h2
           className="animate-up mb-24 text-5xl leading-[0.9] font-black text-white uppercase md:text-7xl lg:text-8xl"
-          style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: 'calc(var(--tracking-readable) - 1px)' }}
+          style={{ 
+            fontFamily: "'Bebas Neue', sans-serif", 
+            letterSpacing: 'calc(var(--tracking-readable) - 1px)'
+          }}
         >
           On adapte la{' '}
           <span style={{ color: 'var(--lime)', textShadow: '0 0 40px rgba(209,255,0,0.2)' }}>
@@ -215,9 +218,13 @@ export function OffresSection() {
                 </div>
 
                 {/* Price */}
-                <div className="flex items-end gap-2">
+                <div className="flex flex-col gap-1">
+                  <span className="text-sm font-normal text-white/50">
+                    À partir de :
+                  </span>
+                  <div className="flex items-end gap-2">
                   <span
-                    className="text-[clamp(3.5rem,5vw,4.5rem)] leading-none font-black text-white"
+                    className="text-[clamp(3.5rem,5vw,4.5rem)] leading-none font-black text-white transition-colors duration-300 group-hover:text-[var(--lime)]"
                     style={{
                       fontFamily: "'Bebas Neue', sans-serif",
                       letterSpacing: 'var(--tracking-tight)',
@@ -227,6 +234,7 @@ export function OffresSection() {
                   </span>
                   <span className="mb-2 text-xl font-bold text-[var(--lime)]">€</span>
                 </div>
+              </div>
 
                 {/* Divider */}
                 <div className="h-px w-full bg-white/5 transition-colors group-hover:bg-white/10" />
@@ -249,6 +257,7 @@ export function OffresSection() {
                 {/* CTA */}
                 <a
                   href="#contact"
+                  onClick={() => window.dispatchEvent(new CustomEvent('select-service', { detail: offre.id }))}
                   className="mt-auto block w-full rounded-full border border-white/20 bg-white/5 py-4 text-center text-xs font-bold tracking-wider text-white uppercase shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] transition-all duration-300 group-hover:border-transparent group-hover:bg-[var(--lime)] group-hover:text-black group-active:scale-95"
                 >
                   Sélectionner
@@ -283,7 +292,7 @@ export function OffresSection() {
             </div>
 
             <div className="mb-6 rounded-full border border-[var(--lime)] bg-[var(--lime)]/10 px-6 py-2 text-sm font-bold tracking-widest text-[var(--lime)] uppercase shadow-[0_0_15px_rgba(209,255,0,0.3)]">
-              Offre Sprint
+              Offre de lancement
             </div>
             <h3
               className="mb-4 text-4xl font-black text-white uppercase md:text-6xl"

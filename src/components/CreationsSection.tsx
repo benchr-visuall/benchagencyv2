@@ -9,24 +9,24 @@ gsap.registerPlugin(ScrollTrigger)
 const PROJECTS = [
   {
     id: '01',
-    name: 'Igloo Inc',
+    name: 'Infinisys',
     category: 'Web Experience',
     year: '2025',
-    url: 'https://www.igloo.inc',
+    url: 'https://infinisys-v1.vercel.app/',
   },
   {
     id: '02',
-    name: 'Lando Norris',
+    name: 'Boz Plaque',
     category: 'Portfolio',
     year: '2024',
-    url: 'https://landonorris.com',
+    url: 'https://bozplaque.vercel.app/',
   },
   {
     id: '03',
-    name: 'KPR Verse',
+    name: 'Art Ensemble',
     category: 'Web3 Experience',
     year: '2024',
-    url: 'https://kprverse.com',
+    url: 'https://artensemble.vercel.app/',
   },
 ] as const
 
@@ -71,9 +71,9 @@ export function CreationsSection() {
 
   return (
     <section
-      id="creations"
+      id="nos-creations"
       ref={sectionRef}
-      className="noise relative flex flex-col items-center border-t border-white/5 py-32 md:py-48"
+      className="relative flex flex-col items-center border-t border-white/5 py-32 md:py-48"
       style={{ background: 'var(--off-black)' }}
       onMouseMove={onMouseMove}
     >
@@ -113,21 +113,24 @@ export function CreationsSection() {
           >
             06
           </span>
-          <span className="h-px w-8 bg-white/20" />
-          <span className="text-xs font-bold tracking-widest text-gray-400 uppercase">
-            Créations
+          <span className="h-px w-12 bg-white/20" />
+          <span className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase">
+            Nos créations
           </span>
-          <span className="h-px w-8 bg-white/20" />
+          <span className="h-px w-12 bg-white/20" />
         </div>
 
         {/* Title */}
         <h2
-          className="animate-up mb-24 text-5xl leading-[0.9] font-black text-white uppercase md:text-7xl lg:text-9xl"
-          style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: 'calc(var(--tracking-readable) - 1px)' }}
+          className="animate-up mb-24 text-5xl leading-[0.9] font-black text-white uppercase md:text-7xl lg:text-8xl"
+          style={{ 
+            fontFamily: "'Bebas Neue', sans-serif", 
+            letterSpacing: 'calc(var(--tracking-readable) - 1px)' 
+          }}
         >
           Que c'est{' '}
           <span style={{ color: 'var(--lime)', textShadow: '0 0 40px rgba(209,255,0,0.2)' }}>
-            beauuuu
+            beau.
           </span>
         </h2>
       </div>
@@ -167,7 +170,7 @@ export function CreationsSection() {
                     className="text-left text-3xl font-black tracking-tight text-white uppercase transition-colors duration-300 group-hover:text-[var(--lime)] md:text-5xl lg:text-6xl"
                     style={{
                       fontFamily: "'Bebas Neue', sans-serif",
-                      letterSpacing: 'var(--tracking-ultra)',
+                      letterSpacing: 'calc(var(--tracking-ultra) + 1px)',
                     }}
                   >
                     {project.name}

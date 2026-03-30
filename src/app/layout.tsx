@@ -29,6 +29,9 @@ export const metadata: Metadata = {
     description:
       'Un brief ce matin. Votre site en ligne demain. Architecture optimisée, vitesse maximale, zéro frais cachés.',
   },
+  icons: {
+    icon: '/favicon.svg',
+  },
 }
 
 export default function RootLayout({
@@ -47,8 +50,8 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
-        <CustomCursor />
         <Preloader />
+        <CustomCursor />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

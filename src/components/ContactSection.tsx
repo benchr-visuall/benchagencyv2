@@ -1,6 +1,6 @@
 'use client'
 
-import { useActionState, useEffect, useRef } from 'react'
+import { useActionState, useEffect, useRef, useState } from 'react'
 import { submitContact, type FormState } from '@/actions/contact'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -18,6 +18,7 @@ const SERVICES = [
 export function ContactSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const [state, action, pending] = useActionState<FormState, FormData>(submitContact, null)
+  const [selectedService, setSelectedService] = useState<string | null>(null)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -45,14 +46,22 @@ export function ContactSection() {
       })
     }, sectionRef)
 
-    return () => ctx.revert()
+    const handleSelectService = (e: any) => {
+      setSelectedService(e.detail)
+    }
+
+    window.addEventListener('select-service', handleSelectService)
+    return () => {
+      ctx.revert()
+      window.removeEventListener('select-service', handleSelectService)
+    }
   }, [])
 
   return (
     <section
       id="contact"
       ref={sectionRef}
-      className="noise relative flex flex-col items-center border-t border-white/5 px-6 py-32 md:py-48"
+      className="relative flex flex-col items-center border-t border-white/5 px-6 py-32 md:py-48"
       style={{ background: 'var(--black)' }}
     >
       <div className="mx-auto flex w-full max-w-4xl flex-col items-center text-center">
@@ -67,15 +76,18 @@ export function ContactSection() {
           >
             07
           </span>
-          <span className="h-px w-8 bg-white/20" />
-          <span className="text-xs font-bold tracking-widest text-gray-400 uppercase">Contact</span>
-          <span className="h-px w-8 bg-white/20" />
+          <span className="h-px w-12 bg-white/20" />
+          <span className="text-xs font-bold tracking-[0.3em] text-gray-400 uppercase">Contact</span>
+          <span className="h-px w-12 bg-white/20" />
         </div>
 
         {/* Title */}
         <h2
           className="animate-up mb-16 text-5xl leading-[0.9] font-black text-white uppercase md:text-7xl lg:text-8xl"
-          style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: 'calc(var(--tracking-readable) - 1px)' }}
+          style={{ 
+            fontFamily: "'Bebas Neue', sans-serif", 
+            letterSpacing: 'calc(var(--tracking-readable) - 1px)' 
+          }}
         >
           Démarrez le{' '}
           <span style={{ color: 'var(--lime)', textShadow: '0 0 40px rgba(209,255,0,0.2)' }}>
@@ -107,15 +119,14 @@ export function ContactSection() {
             <form action={action} className="flex flex-col gap-10">
               {/* Service selection */}
               <div>
-                <label className="mb-6 block text-xs font-bold tracking-widest text-gray-400 uppercase">
+                <label className="mb-6 block text-xs font-bold tracking-widest text-[var(--lime)] uppercase">
                   Quel module vous intéresse ?
                 </label>
                 <div className="flex flex-wrap gap-4">
                   {SERVICES.map((s) => (
                     <label
                       key={s.id}
-                      className="group flex cursor-none items-center gap-3 rounded-full border border-white/20 bg-transparent px-6 py-3 text-xs font-bold tracking-widest uppercase transition-all duration-300 hover:border-white/40 has-[:checked]:border-[var(--lime)] has-[:checked]:bg-[var(--lime)] has-[:checked]:text-black"
-                      style={{ color: 'rgba(255,255,255,0.7)' }}
+                      className="group flex cursor-none items-center gap-3 rounded-full border border-white/20 bg-transparent px-6 py-3 text-xs font-bold tracking-widest text-white/70 uppercase transition-all duration-300 hover:border-[var(--lime)]/50 has-[:checked]:border-[var(--lime)] has-[:checked]:bg-[var(--lime)] has-[:checked]:text-black"
                     >
                       <input
                         type="radio"
@@ -123,6 +134,8 @@ export function ContactSection() {
                         value={s.id}
                         className="sr-only"
                         required
+                        checked={selectedService === s.id}
+                        onChange={() => setSelectedService(s.id)}
                       />
                       {s.label}
                     </label>
@@ -133,7 +146,7 @@ export function ContactSection() {
               {/* Grid Fields */}
               <div className="grid gap-6 md:grid-cols-2">
                 <div className="flex flex-col gap-3">
-                  <label className="text-xs font-bold tracking-widest text-gray-400 uppercase">
+                  <label className="text-xs font-bold tracking-widest text-[var(--lime)] uppercase">
                     Nom
                   </label>
                   <input
@@ -141,12 +154,12 @@ export function ContactSection() {
                     name="name"
                     placeholder="Jean Dupont"
                     required
-                    className="w-full rounded-xl border border-white/10 bg-black/50 px-5 py-4 text-white transition-all outline-none placeholder:text-gray-700 focus:border-[var(--lime)] focus:bg-white/[0.02]"
+                    className="w-full rounded-xl border border-white/10 bg-black/50 px-5 py-4 text-white transition-all outline-none placeholder:text-gray-700 hover:border-[var(--lime)]/50 focus:border-[var(--lime)] focus:bg-white/[0.02]"
                   />
                 </div>
 
                 <div className="flex flex-col gap-3">
-                  <label className="text-xs font-bold tracking-widest text-gray-400 uppercase">
+                  <label className="text-xs font-bold tracking-widest text-[var(--lime)] uppercase">
                     Email
                   </label>
                   <input
@@ -154,13 +167,13 @@ export function ContactSection() {
                     name="email"
                     placeholder="jean@exemple.fr"
                     required
-                    className="w-full rounded-xl border border-white/10 bg-black/50 px-5 py-4 text-white transition-all outline-none placeholder:text-gray-700 focus:border-[var(--lime)] focus:bg-white/[0.02]"
+                    className="w-full rounded-xl border border-white/10 bg-black/50 px-5 py-4 text-white transition-all outline-none placeholder:text-gray-700 hover:border-[var(--lime)]/50 focus:border-[var(--lime)] focus:bg-white/[0.02]"
                   />
                 </div>
               </div>
 
               <div className="flex flex-col gap-3">
-                <label className="text-xs font-bold tracking-widest text-gray-400 uppercase">
+                <label className="text-xs font-bold tracking-widest text-[var(--lime)] uppercase">
                   Projet
                 </label>
                 <textarea
@@ -168,7 +181,7 @@ export function ContactSection() {
                   rows={5}
                   placeholder="Expliquez-nous votre vision..."
                   required
-                  className="w-full resize-none rounded-xl border border-white/10 bg-black/50 px-5 py-4 text-white transition-all outline-none placeholder:text-gray-700 focus:border-[var(--lime)] focus:bg-white/[0.02]"
+                  className="w-full resize-none rounded-xl border border-white/10 bg-black/50 px-5 py-4 text-white transition-all outline-none placeholder:text-gray-700 hover:border-[var(--lime)]/50 focus:border-[var(--lime)] focus:bg-white/[0.02]"
                 />
               </div>
 
