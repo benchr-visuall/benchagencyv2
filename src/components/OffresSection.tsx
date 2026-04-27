@@ -12,7 +12,7 @@ const OFFRES = [
     tier: 'Basic',
     tagline: "L'essentiel en une page.",
     description: 'Pour être en ligne hier.',
-    price: '690',
+    price: '890',
     features: [
       'Landing page (page unique)',
       'Design 100% Responsive',
@@ -26,15 +26,15 @@ const OFFRES = [
   {
     id: 'multi',
     tier: 'Multi',
-    tagline: 'La vitrine complète.',
-    description: 'Pour asseoir votre autorité sur tous vos métiers.',
-    price: '1190',
+    tagline: 'Le catalyseur de croissance.',
+    description: 'Pour transformer votre visibilité en une machine à conversion.',
+    price: '1590',
     features: [
       'Intégralité du pack BASIC inclut +',
       "Site multi page (jusqu'à 5 pages)",
       'Livraison en 72h',
-      'Maillage interne (SEO optimisé par page)',
-      'Architecture de navigation fluide',
+      'Référencement optimisé par page',
+      'Navigation fluide et expérience utilisateur optimisée',
       '1 Module au choix (WhatsApp / Réservation / Chat box...)',
     ],
     featured: true,
@@ -44,10 +44,10 @@ const OFFRES = [
     tier: 'Signature',
     tagline: "L'exception visuelle.",
     description: 'Un design artisanal pour marquer les esprits.',
-    price: '1890',
+    price: '2490',
     features: [
       'Intégralité du pack MULTI inclut +',
-      'Design "Haute Couture" (100% sur-mesure)',
+      'Design unique et sur-mesure',
       'Copywriting (Aide à la rédaction stratégique)',
       'Livraison en 1 semaine',
       'Modules supplémentaire illimités',
@@ -260,7 +260,7 @@ export function OffresSection() {
                   onClick={() => window.dispatchEvent(new CustomEvent('select-service', { detail: offre.id }))}
                   className="mt-auto block w-full rounded-full border border-white/20 bg-white/5 py-4 text-center text-xs font-bold tracking-wider text-white uppercase shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] transition-all duration-300 group-hover:border-transparent group-hover:bg-[var(--lime)] group-hover:text-black group-active:scale-95"
                 >
-                  Sélectionner
+                  Lancer votre projet
                 </a>
               </div>
             </div>

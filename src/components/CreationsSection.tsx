@@ -10,22 +10,29 @@ const PROJECTS = [
   {
     id: '01',
     name: 'Infinisys',
-    category: 'Web Experience',
-    year: '2025',
+    category: '',
+    year: '2026',
     url: 'https://infinisys-v1.vercel.app/',
   },
   {
     id: '02',
     name: 'Boz Plaque',
-    category: 'Portfolio',
-    year: '2024',
+    category: '',
+    year: '2026',
     url: 'https://bozplaque.vercel.app/',
   },
   {
     id: '03',
+    name: 'Phryll Technologie',
+    category: '',
+    year: '2026',
+    url: 'https://phrylltechnologie.vercel.app/',
+  },
+  {
+    id: '04',
     name: 'Art Ensemble',
-    category: 'Web3 Experience',
-    year: '2024',
+    category: '',
+    year: '2026',
     url: 'https://artensemble.vercel.app/',
   },
 ] as const
@@ -179,9 +186,11 @@ export function CreationsSection() {
 
                 {/* Sub info */}
                 <div className="flex items-center gap-8 self-end tracking-widest uppercase md:self-auto">
-                  <span className="hidden text-xs font-bold text-gray-500 transition-colors duration-300 group-hover:text-white md:block">
-                    {project.category}
-                  </span>
+                  {project.category && (
+                    <span className="hidden text-xs font-bold text-gray-500 transition-colors duration-300 group-hover:text-white md:block">
+                      {project.category}
+                    </span>
+                  )}
                   <span className="text-xs font-bold text-gray-500 transition-colors duration-300 group-hover:text-white">
                     {project.year}
                   </span>
